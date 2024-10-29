@@ -22,6 +22,7 @@ class CommandInterface:
         }
         self.board = [[None]]
         self.player = 1
+        self.pattern = []
     
     #===============================================================================================
     # VVVVVVVVVV START of PREDEFINED FUNCTIONS. DO NOT MODIFY. VVVVVVVVVV
@@ -266,11 +267,22 @@ class CommandInterface:
     
     # new function to be implemented for assignment 3
     def loadpatterns(self, args):
-        raise NotImplementedError("This command is not yet implemented.")
+        with open(args[0], 'r') as file:
+            pattern = [line.strip().split() for line in file]
+
+        print(pattern)
+    
+        # Delete previously loaded patterns
+        # Load pattern in format: "loadpatterns xpattern.txt"
         return True
     
     # new function to be implemented for assignment 3
     def policy_moves(self, args):
+        # Compare loaded pattern to current board
+        # Weigh each move according to pattern
+        # show all moves and weights
+        # -- Numerically sorted in increasing order by x-coord first, then y-coord, then by digit
+    
         raise NotImplementedError("This command is not yet implemented.")
         return True
     
@@ -278,6 +290,6 @@ class CommandInterface:
     # ɅɅɅɅɅɅɅɅɅɅ END OF ASSIGNMENT 3 FUNCTIONS. ɅɅɅɅɅɅɅɅɅɅ
     #===============================================================================================
     
-if __name__ == "__main__":
+if __name__ == "__main__":#
     interface = CommandInterface()
     interface.main_loop()
