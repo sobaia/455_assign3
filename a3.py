@@ -268,9 +268,9 @@ class CommandInterface:
     # new function to be implemented for assignment 3
     def loadpatterns(self, args):
         with open(args[0], 'r') as file:
-            pattern = [line.strip().split() for line in file]
+            self.pattern = [line.strip().split() for line in file]
 
-        print(pattern)
+        print(self.pattern)
     
         # Delete previously loaded patterns
         # Load pattern in format: "loadpatterns xpattern.txt"
@@ -282,9 +282,67 @@ class CommandInterface:
         # Weigh each move according to pattern
         # show all moves and weights
         # -- Numerically sorted in increasing order by x-coord first, then y-coord, then by digit
-    
-        raise NotImplementedError("This command is not yet implemented.")
+
+        final_move = ""
+        row = [''.join(str(x) if x is not None else '.' for x in row) for row in self.board]
+        col = [''.join(str(x) if x is not None else '.' for x in col) for col in zip(*self.board)]
+
+
+
+        # legal_moves = self.get_legal_moves()
+        # if legal_moves != []:
+        #     sorted_legal = sorted(legal_moves, key=lambda x: (int(x[0]), int(x[1]), int(x[2])))
+        #     if self.pattern == []:
+        #         for i in range(len(sorted_legal)):
+        #             final_move += sorted_legal[i][0] + " " + sorted_legal[i][1] + " " + sorted_legal[i][2] + " " + str(round(1/len(sorted_legal), 3)) + " "
+        #     else:
+        #         for p, pattern in enumerate(self.pattern):
+        #             if "X" in pattern[0]:
+        #                 in_board = self.get_non_x_positions(pattern[0])
+        #                 out_board = self.get_x_positions(pattern[0])
+        #                 check = "".join(pattern[i] for i in in_board)
+
+
+
+
+                
+        
+        # print(final_move)
+
+        # pattern = "1..XX"
+        # pattern2 = "XX..1"
+        # board = "101101.1.."
+        # board2 = "..1001001."
+        # in_board = []
+        # pattern_found = False
+
+
+        # if "X" in pattern:
+        #     in_board = self.get_non_x_positions(pattern)
+        #     out_board = self.get_x_positions(pattern)
+        #     check = "".join(pattern[i] for i in in_board)
+
+        #     for i in range(len(board) - len(check) + 1):
+        #         if board[i:i+len(check)] == check:
+        #             difference = i - in_board[0]
+        #             range_check = [x + difference for x in out_board]
+        #             all_out_of_bounds = all(value > (len(board)-1) or value < 0 for value in range_check)
+        #             if all_out_of_bounds:
+        #                 pattern_found = True
+        #                 break
+            
+            
+
+            
+
         return True
+    
+    def get_x_positions(self, pattern):
+        positions = [i for i, c in enumerate(pattern) if c == "X"]
+        return positions
+    def get_non_x_positions(self, pattern):
+        positions = [i for i, c in enumerate(pattern) if c != "X"]
+        return positions
     
     #===============================================================================================
     # ɅɅɅɅɅɅɅɅɅɅ END OF ASSIGNMENT 3 FUNCTIONS. ɅɅɅɅɅɅɅɅɅɅ
