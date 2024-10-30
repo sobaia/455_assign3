@@ -284,23 +284,75 @@ class CommandInterface:
         # -- Numerically sorted in increasing order by x-coord first, then y-coord, then by digit
 
         final_move = ""
-        row = [''.join(str(x) if x is not None else '.' for x in row) for row in self.board]
-        col = [''.join(str(x) if x is not None else '.' for x in col) for col in zip(*self.board)]
+        rows = [''.join(str(x) if x is not None else '.' for x in row) for row in self.board]
+        cols = [''.join(str(x) if x is not None else '.' for x in col) for col in zip(*self.board)]
+        pattern_rows = []
+        pattern_cols = []
+        full_patterns = self.pattern
 
+        # I first want to add the flipped versions of the patterns so I can implement 180 flips
+        for entry in self.pattern:
+            pattern_entry = [entry[0][::-1], entry[1], entry[2]]
+            full_patterns.append(pattern_entry)
+        
+        print(full_patterns)
 
 
         # legal_moves = self.get_legal_moves()
+        # # If there are legal moves
         # if legal_moves != []:
+        #     # Sort the Legal Moves
         #     sorted_legal = sorted(legal_moves, key=lambda x: (int(x[0]), int(x[1]), int(x[2])))
+        #     # If there are no patterns to be looked at
         #     if self.pattern == []:
+        #         # Calculate the final output based on basic math
         #         for i in range(len(sorted_legal)):
         #             final_move += sorted_legal[i][0] + " " + sorted_legal[i][1] + " " + sorted_legal[i][2] + " " + str(round(1/len(sorted_legal), 3)) + " "
+        #         # Make sure to get rid of the last space in the final output
+        #         final_move = final_move[:-1]
+        #     # If there are patterns to be looked at
         #     else:
+        #         # For every pattern there is to look at
         #         for p, pattern in enumerate(self.pattern):
+        #             # If there is out of bounds in the pattern
         #             if "X" in pattern[0]:
+        #                 # Get the relevant part of the pattern (remove the Xs)
         #                 in_board = self.get_non_x_positions(pattern[0])
         #                 out_board = self.get_x_positions(pattern[0])
         #                 check = "".join(pattern[i] for i in in_board)
+                        
+        #                 # For every row I want to check if the pattern exists
+        #                 for r, row in enumerate(rows):
+        #                     # Make sure row is long enough to even consider a pattern
+        #                     if (len(row) - len(check) + 1) > 1:
+        #                         # Then now check for pattern
+        #                         for i in range(len(row) - len(check) + 1):
+        #                             # Check for the X out of bounds positions
+        #                             if row[i:i+len(check)] == check:
+        #                                 difference = i - in_board[0]
+        #                                 range_check = [x + difference for x in out_board]
+        #                                 all_out_of_bounds = all(value > (len(row)-1) or value < 0 for value in range_check)
+        #                                 # If the pattern exists with the out of bounds positions
+        #                                 if all_out_of_bounds:
+        #                                     pattern_rows.append([r, pattern])
+        #                 # For every col I want to check if the pattern exists          
+        #                 for c, col in enumerate(cols):
+        #                     # Make sure col is long enough to even consider a pattern
+        #                     if (len(col) - len(check) + 1) > 1:
+        #                         # Then now check for pattern
+        #                         for i in range(len(col) - len(check) + 1):
+        #                             # Check for the X out of bounds positions
+        #                             if row[i:i+len(col)] == col:
+        #                                 difference = i - in_board[0]
+        #                                 range_check = [x + difference for x in out_board]
+        #                                 all_out_of_bounds = all(value > (len(col)-1) or value < 0 for value in range_check)
+        #                                 # If the pattern exists with the out of bounds positions
+        #                                 if all_out_of_bounds:
+        #                                     pattern_cols.append([c, pattern])
+
+                    
+
+
 
 
 
